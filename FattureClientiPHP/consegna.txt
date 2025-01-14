@@ -1,0 +1,14 @@
+Realizzare un'applicazione php così strutturata:
+array associativo CLIENTI (dati hardcoded)
+    int id
+    string nome
+    string cognome
+    DateTime dataNascita
+
+array associativo FATTURE (dati hardcoded)
+    int idCliente
+    double importo
+    DateTime dataFattura
+
+Scrivere funzione che dato un cliente (nome cognome)
+visualizzi in una tabella le relative fatture e l'importo totale
