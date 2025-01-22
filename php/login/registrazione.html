@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<script language='javascript' type='text/javascript'>
+	function validaCampiPassword() {
+
+		var valuePassword = document.getElementById('passwordID').value;
+		var valueConferma = document.getElementById('passwordConfermaID').value;
+		if (valuePassword != valueConferma) {
+			alert("Le password non corrispondono", "OKKIO");
+			return false; 
+		 }
+		 return true;
+	}
+</script>
+
+<html>
+	<head>
+	<title></title>
+	</head>
+	<body>
+		<form action="salvaDati.php" onSubmit="return validaCampiPassword();" method="post">
+		  Username: <input name="username" id="username" pattern="[A-Za-z]{6}" required title="Lo username deve essere esattamente 6 caratteri"><br />
+		  E-mail: <input type="email" name="email" id="email" required = "required"><br />
+		  Password: <input id="passwordID" type="password" name="password" pattern=".{7,}" required = "required" title="La password deve essere almeno 7 caratteri" /><br />
+		  Conferma password: <input id="passwordConfermaID" type="password" required = "required" name="conferma_password" oninput="check(this)"/><br />
+		  Data di nascita: <input type="date" name="data" /><br />
+		  <input type="submit" required = "required" />
+		</form>
+	<body>
+</html>
