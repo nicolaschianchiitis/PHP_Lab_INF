@@ -34,7 +34,7 @@
         exit("Database esistente !");
     }*/
     
-    $comandoCreazioneDB = "CREATE DATABASE motociclismo"
+    $comandoCreazioneDB = "CREATE DATABASE motociclismo "
 						. "DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
         
     if($connect->query($comandoCreazioneDB) === false) {
