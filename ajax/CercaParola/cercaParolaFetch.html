@@ -1,0 +1,35 @@
+<html>
+<head>
+<script>
+    function cercaMostraSuggerimento(str) {
+        if (str.length == 0) {
+            document.getElementById("txtHint").innerHTML = "";
+            return;
+        } else {
+            fetch("cercaParola.php?q=" + str)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Errore: ${response.statusText}`);
+                    }
+                    return response.text(); // Usa .text() invece di .json() perché la risposta è testo
+                })
+                .then(data => {
+                    document.getElementById("txtHint").innerHTML = data;
+                })
+                .catch(error => {
+                    console.error("Errore durante la richiesta:", error);
+                });
+        }
+    }
+</script>
+</head>
+
+<body>
+	<b>Scrivi un nome da ricercare qui sotto:</b>
+	<br/><br/>
+	<form> 
+		Nome: <input type="text" onkeyup="cercaMostraSuggerimento(this.value)">
+	</form>
+	<p>Suggerimento: <span id="txtHint"></span></p>
+</body>
+</html>

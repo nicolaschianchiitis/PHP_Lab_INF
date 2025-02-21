@@ -1,0 +1,49 @@
+<html>
+<head>
+<script>
+	function login() {
+		var xmlhttp = new XMLHttpRequest();
+		//configurazione e chiamata ajax con verbo POST parametri passati dai valori tag html
+		// e risposta in JSon stampata in formato e nativo e decodificata.
+		xmlhttp.onreadystatechange =
+			function() {
+				/*
+				https://www.w3schools.com/js/js_ajax_http.asp
+				la funzione callback asincrona onreadystatechange viene invocata almeno 4 volte 
+				durante il completamento della richiesta http per comunicare gli stati (readyState)
+				fino al valore readyState = 4
+				In alternativa si può usare più comodamente l'evento
+				xmlhttp.onload = ....   per cui si può evitare il test su readyState
+				*/
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					// risposta ajax in json
+					var s = "Risposta JSON: " + xmlhttp.responseText + "<br>";
+					var obj = JSON.parse(xmlhttp.responseText);
+					s += "Risposta decodificata da json: utente=" + obj.utente + " password=" + obj.password + 
+					     " email: " + obj.email;
+					document.getElementById("utenteRisposta").innerHTML = s;
+				}
+			}
+		// Eventualmente anche 
+		xmlhttp.open("POST", "loginJSon.php", true);
+		// necessaria per POST e parametri
+		xmlhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+		var utente = document.getElementById("utente").value;
+		var password = document.getElementById("password").value;
+		// invocazione ajax e passaggio di parametri
+		xmlhttp.send("utente=" + utente + "&password=" + password);
+	}
+</script>
+</head>
+
+<body>
+	<b>Fai login:</b>
+	<br/><br/>
+	<form> 
+		User: <input type="text" id="utente" value="pippo">
+		Password: <input type="password" id="password" value="pippo">
+		<button type="button" onclick="login()">Fai login</button>
+	</form>
+	<p>Utente: <span id="utenteRisposta"></span></p>
+</body>
+</html>
