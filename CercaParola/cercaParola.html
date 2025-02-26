@@ -1,0 +1,36 @@
+<html>
+<head>
+	<!-- https://www.w3schools.com/js/js_ajax_intro.asp -->
+<script>
+	function cercaMostraSuggerimento(str) {
+		if (str.length == 0) { 
+			document.getElementById("txtHint").innerHTML = "";
+			return;
+		} 
+		else {
+			var xmlhttp = new XMLHttpRequest();
+			// funzione di callback, eventualmente se si vogliono valutare gli stadi intermedi della chiamata-risposta
+			// si può usare anche xmlhttp.onreadystatechange
+			xmlhttp.onload = 
+				function() {
+					// valuta stato della risposta (es 404: "Page not found")
+					if (xmlhttp.status == 200) {
+						document.getElementById("txtHint").innerHTML = xmlhttp.responseText;
+					}
+				}
+			xmlhttp.open("GET", "cercaParola.php?q=" + str, true);
+			xmlhttp.send();
+		}
+	}
+</script>
+</head>
+
+<body>
+	<b>Scrivi un nome da ricercare qui sotto:</b>
+	<br/><br/>
+	<form> 
+		Nome: <input type="text" onkeyup="cercaMostraSuggerimento(this.value)">
+	</form>
+	<p>Suggerimento: <span id="txtHint"></span></p>
+</body>
+</html>
